@@ -63,7 +63,7 @@ spec:
       containers:
       - name: k8szk
         imagePullPolicy: Always
-        image: gcr.io/google_samples/k8szk:v3
+        image: gcr.azk8s.cn/google_samples/k8szk:v3
         resources:
           requests:
             memory: "2Gi"
@@ -146,6 +146,7 @@ spec:
       name: datadir
     spec:
       accessModes: [ "ReadWriteOnce" ]
+      storageClassName: alicloud-nas
       resources:
         requests:
           storage: 10Gi
