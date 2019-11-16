@@ -6,7 +6,7 @@ ENV ZK_USER=zookeeper \
     ZK_LOG_DIR=/var/log/zookeeper \
     JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
-ARG GPG_KEY=BBE7232D7991050B54C8EA0ADC08637CA615D22C
+ARG GPG_KEY=586EFEF859AF2DB190D84080BDB2011E173C31A2
 # ARG GPG_KEY=C823E3E5B12AF29C67F81976F5CECB3CB5E9BD2D
 ARG ZK_DIST=zookeeper-3.5.6
 
@@ -16,7 +16,9 @@ RUN set -x \
     && wget -q "http://www.apache.org/dist/zookeeper/$ZK_DIST/apache-$ZK_DIST.tar.gz" \
     && wget -q "http://www.apache.org/dist/zookeeper/$ZK_DIST/apache-$ZK_DIST.tar.gz.asc" \
     && export GNUPGHOME="$(mktemp -d)" \
-    && gpg --keyserver ha.pool.sks-keyservers.net --recv-key "$GPG_KEY" \
+    && gpg --keyserver ha.pool.sks-keyservers.net --recv-key "$GPG_KEY" || \
+    gpg --keyserver pgp.mit.edu --recv-key "$GPG_KEY" || \
+    gpg --keyserver keyserver.pgp.com --recv-key "$GPG_KEY" \
     && gpg --batch --verify "apache-$ZK_DIST.tar.gz.asc" "apache-$ZK_DIST.tar.gz" \
     && tar -xzf "apache-$ZK_DIST.tar.gz" -C /opt \
     && rm -r "$GNUPGHOME" "apache-$ZK_DIST.tar.gz" "apache-$ZK_DIST.tar.gz.asc" \
