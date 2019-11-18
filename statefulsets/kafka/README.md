@@ -296,7 +296,7 @@ From the command line create a topic using `kafka-topics.sh`
 
 Run the console consumer as below.
 ```shell
-> kafka-console-consumer.sh --topic test --bootstrap-server localhost:9093
+>   kafka-console-consumer.sh --topic test --bootstrap-server localhost:9093
 ```
 
 Use `kubectl exec` to execute a bash shell on another one of the brokers. You 
